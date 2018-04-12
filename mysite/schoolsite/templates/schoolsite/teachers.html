@@ -1,0 +1,36 @@
+{% extends 'schoolsite/base.html' %}
+
+{% block title %}Leraren{% endblock %}
+
+{% block body %}
+
+    <!-- Page Content -->
+    <div class="container">
+
+      <!-- Jumbotron Header -->
+      <header class="jumbotron my-4">
+                <h2 class="display-3"><strong>Wie zijn onze leerkrachten</strong></h2>
+        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
+      </header>
+
+      <!-- Page Features -->
+      <div class="row text-center">
+        {% for teacher in all_teachers %}
+                <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="card">
+                                <img class="card-img-top img-responsive" src="{{ teacher.image.url }}" alt="">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{ teacher.first_name }} {{ teacher.last_name }}</h4>
+                                    <p class="card-text">{{ teacher.details }} {{ teacher.email }}</p>
+                                </div>
+                         </div>
+                </div>
+        {% endfor %}
+
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+{% endblock %}

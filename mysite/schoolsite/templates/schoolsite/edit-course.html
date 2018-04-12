@@ -1,0 +1,31 @@
+{% extends 'schoolsite/base.html' %}
+
+{% block title %}Edit Richting{% endblock %}
+
+{% block body %}
+{% load widget_tweaks%}
+
+<!-- Page Content -->
+<div class="container formcontainer">
+    <div class="col-md-6 form1">
+        <div class="form-area">  
+            <form role="form" method="POST" action="/intranet/" enctype="multipart/form-data">
+                <br style="clear:both">
+                <h3 style="margin-bottom: 25px; text-align: center;">Edit Richting</h3>
+                {% csrf_token %} {% for hidden in form.hidden_fields %} {{ hidden }} {% endfor %} {% for field in form.visible_fields %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field|add_class:'form-control' }} {% for error in field.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+                <div class="form-group">
+                    <button type="submit" id="submit" name="submit" class="btn btn-success pull-left">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- /.container -->
+{% endblock %}

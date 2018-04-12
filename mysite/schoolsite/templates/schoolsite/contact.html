@@ -1,0 +1,37 @@
+{% extends 'schoolsite/base.html' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+{% load widget_tweaks%}
+
+<!-- Page Content -->
+<div class="container formcontainer">
+    <div class="col-md-6 form1">
+        <div class="form-area">  
+            <form role="form" method="POST" action="/contact/">
+                <br style="clear:both">
+                <h3>Onze contactgegevens</h3>
+                <p>
+                    Besteschoollaan 100<br>
+                    2000 Antwerpen<br>
+                    +32(0)3 666 13 37
+                </p>
+                <h3 style="margin-bottom: 25px; text-align: center;">Contact Formulier</h3>
+                {% csrf_token %} {% for hidden in form.hidden_fields %} {{ hidden }} {% endfor %} {% for field in form.visible_fields %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field|add_class:'form-control' }} {% for error in field.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+                <div class="form-group">
+                    <button type="submit" id="submit" name="submit" class="btn btn-primary pull-left">Verstuur</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- /.container -->
+{% endblock %}

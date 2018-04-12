@@ -1,0 +1,97 @@
+{% extends 'schoolsite/base.html' %}
+
+{% block title %}Intranet{% endblock %}
+
+{% block body %}
+
+    <!-- Page Content -->
+    <div class="container">
+
+      <!-- Jumbotron Header -->
+      <header class="jumbotron my-4">
+            <h2 class="display-3"><strong>INTRANET</strong></h2>
+        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
+      </header>
+      <!-- Page Features -->
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">PK</th>
+            <th scope="col">Richting naam</th>
+            <th scope="col">Richting beschrijving</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for course in all_courses %}
+          <tr>
+            <td>{{ course.pk }}</td>
+            <td>{{ course.course_name }}</td>
+            <td>{{ course.course_desc }}</td>
+            <td>
+                <a href="edit-course" class="btn btn-warning a-btn-slide-text">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    <span><strong>Edit</strong></span>            
+                </a>
+                <form action="{% url 'schoolsite:delete_course' course.id %}">
+                  <a href="intranet" class="btn btn-danger a-btn-slide-text">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                      <span><strong>Delete</strong></span>            
+                  </a>
+                </form>
+            </td>
+          </tr>
+        </tbody>
+        {% endfor %}
+      </table>
+      <a href="new-course" class="btn btn-primary a-btn-slide-text">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          <span><strong>Add</strong></span>            
+      </a>
+      <br>
+      <br>
+      <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">PK</th>
+              <th scope="col">Leerkracht voornaam</th>
+              <th scope="col">Leerkracht achternaam</th>
+              <th scope="col">Leerkracht email</th>
+              <th scope="col">Leerkracht beschrijving</th>
+              <th scope="col">Leerkracht foto</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for teacher in all_teachers %}
+            <tr>
+              <td>{{ teacher.pk }}</td>
+              <td>{{ teacher.first_name }}</td>
+              <td>{{ teacher.last_name }}</td>
+              <td>{{ teacher.email }}</td>
+              <td>{{ teacher.details }}</td>
+              <td><img class="card-img-top img-responsive img-thumbnail" style="width:10%" src="{{ teacher.image_url|default_if_none:'#' }}"> {{ teacher.image }}</td> <!-- src="{{ teacher.image.url }}"> -->
+              <td>
+                  <a href="edit-teacher" class="btn btn-warning a-btn-slide-text">
+                      <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                      <span><strong>Edit</strong></span>            
+                  </a>
+                  <form action="{% url 'schoolsite:delete_teacher' teacher.id %}">
+                      <a href="intranet" class="btn btn-danger a-btn-slide-text">
+                          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                          <span><strong>Delete</strong></span>            
+                      </a>
+                  </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <a href="new-teacher" class="btn btn-primary a-btn-slide-text">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            <span><strong>Add</strong></span>            
+        </a>
+    </div>
+    <br>
+    <!-- /.container -->
+{% endblock %}
